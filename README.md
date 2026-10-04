@@ -31,7 +31,7 @@ Inspect `artifacts/local/public-report.json`: an actual local token balance incr
 
 The configured USDC address comes from [Circle's contract list](https://developers.circle.com/stablecoins/usdc-contract-addresses). `npx tsx scripts/check-network.ts` verifies chain ID, deployed token bytecode, decimals, and symbol against the public RPC. `artifacts/sepolia-readonly.json` records that read-only verification. It does not prove a settlement deployment.
 
-**Current evidence:** 35 Solidity tests, 9 verifier/signature/configuration checks and 1 local-runner service-collision guard, TypeScript validation, and the complete local transaction demonstration pass. Public Arbitrum Sepolia deployment is pending free test ETH and test USDC. No public settlement transaction is claimed.
+**Current evidence:** 35 Solidity tests, 9 verifier/signature/configuration checks and 1 local-runner service-collision guard, TypeScript validation, and the complete local transaction demonstration pass. Public Arbitrum Sepolia deployment and the live test-USDC demonstration completed on October 4, 2026. The live run settled 0.20 test USDC, parked a separate 0.10 payment until owner approval, and passed all six rejection controls. Fixtures remain synthetic.
 
 ## Deploy to the public testnet
 
@@ -61,3 +61,12 @@ This entry extends the team's existing **Sumplus Agoranomos** implementation. Th
 The Arbitrum entry adds chain 421614 and canonical ERC-20 test-USDC configuration, independent ETH gas handling, checkpointed/capped deployment, public synthetic demonstrations, local executable transaction evidence, public RPC verification, and new contract protections for pending overwrite, invalid roles, and approval-policy revocation, with regression coverage. No private replay, customer record, production configuration, or key file is included.
 
 MIT license. See `LICENSE`.
+
+## Public Arbitrum Sepolia evidence
+
+- Contract: https://sepolia.arbiscan.io/address/0x8d38dbad863f7bf2b32fc227243a5092afad90e6
+- Settlement: https://sepolia.arbiscan.io/tx/0x637ff59f80fd9c0e0e3154152b2484f16560fd63d16183039ab290d998eec573
+- Owner approval: https://sepolia.arbiscan.io/tx/0x18b6ea58f587e3bebb79698d3ef9a69f1b83d9c1101e8c22917e3278a90f460b
+- Demo video: https://youtu.be/x1lE_p4HCKg
+
+Machine-readable receipts: `artifacts/public-report.json`. The browser UI and recorded video remain synthetic simulations; the linked live transactions use Circle test USDC.
