@@ -1,0 +1,10 @@
+{
+  "scope": "Arbitrum entry; public synthetic fixture only",
+  "solidityTests": {"passed": 35, "failed": 0},
+  "verifierSignatureConfigChecks": {"passed": 9},
+  "localServiceCollisionGuard": {"passed": 1, "existingServiceTouched": false},
+  "localEvmEndToEnd": {"publicDeployment": false, "settledMicro": "200000", "ownerApprovedSecondCaseMicro": "100000", "negativeEthCallControls": 6, "allPassed": true},
+  "regressionMutationControls": {"removedPendingGuard": "regression test failed as expected", "removedRoleChecks": "two regression tests failed as expected", "mainSourceRestored": true},
+  "publicSepolia": {"rpcChainId": 421614, "canonicalTestUsdcDecimals": 6, "settlementDeployed": false},
+  "typescript": "passed"
+}

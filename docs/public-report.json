@@ -1,0 +1,75 @@
+{
+  "network": "local-anvil",
+  "publicDeployment": false,
+  "tokenType": "mock-ERC20-6-decimal",
+  "chainId": 421614,
+  "token": "0xf2e246bb76df876cef8b38ae84130f4f55de395b",
+  "contract": "0x2946259e0334f33a064106302415ad3391bed384",
+  "owner": "0x7E5F4552091A69125d5DfCb7b8C2659029395Bdf",
+  "agent": "0x2B5AD5c4795c026514f8317c7a215E218DcCD6cF",
+  "verifier": "0x6813Eb9362372EEF6200f3b1dbC3f819671cBA69",
+  "payee": "0x7E5F4552091A69125d5DfCb7b8C2659029395Bdf",
+  "ruleVersion": "0x52a088a36662cc5a7e7c8e0f544a1b12fbb3a51e7620ade1a778398557e2e56b",
+  "deploymentTx": "0xf91a41dccd31ee0a726af626d63f3a8cf5ab5b24983002ea211adf1460f85f55",
+  "periodBudgetMicro": "1000000",
+  "approvalThresholdMicro": "250000",
+  "periodSeconds": 86400,
+  "maximumDemoGasReservedWei": "7614380000000",
+  "fixture": "synthetic-public-fixture",
+  "settlementTx": "0xd999d2d6ef0431f7284ff654c6555cd1e97c2a5c6d40f99a8f16b7dbafe48bd0",
+  "settlementBlock": "6",
+  "settlementMicro": "200000",
+  "beforePayeeMicro": "0",
+  "afterPayeeMicro": "200000",
+  "caseId": "0xc5c9f2f837f2d10f28c479fdf9b4623a7e8eda7d9f24582d82161e41f738bcdd",
+  "evidenceHash": "0x3c6a256666f5d18332eed19d2635f3ad8f9e59a9a3489399b078d2a342b01ec0",
+  "eip712Digest": "0x63cb5a5346ff2a3802247a4a4b3acd37accf1096edc284a652043dbfb1daafce",
+  "escalatedTx": "0x455042ead2dfbc79076dd59919f913cf83f6b1a1af082ed66a3527284f9144aa",
+  "approvalTx": "0x29b5d7974df39326f5ede5a66b30d08fbfe627ced8964a1a5776f01571dfcf76",
+  "approvedMicro": "100000",
+  "checks": [
+    {
+      "name": "Agent self-signs",
+      "expected": "ForgedAttestation",
+      "actual": "ForgedAttestation",
+      "passed": true,
+      "mode": "eth_call"
+    },
+    {
+      "name": "Changed signed payee",
+      "expected": "ForgedAttestation",
+      "actual": "ForgedAttestation",
+      "passed": true,
+      "mode": "eth_call"
+    },
+    {
+      "name": "Above observed ceiling",
+      "expected": "ExceedsAttestedMaximum",
+      "actual": "ExceedsAttestedMaximum",
+      "passed": true,
+      "mode": "eth_call"
+    },
+    {
+      "name": "Wrong chain domain",
+      "expected": "ForgedAttestation",
+      "actual": "ForgedAttestation",
+      "passed": true,
+      "mode": "eth_call"
+    },
+    {
+      "name": "Expired attestation",
+      "expected": "AttestationExpired",
+      "actual": "AttestationExpired",
+      "passed": true,
+      "mode": "eth_call"
+    },
+    {
+      "name": "Replay consumed intent 0",
+      "expected": "IntentAlreadyUsed",
+      "actual": "IntentAlreadyUsed",
+      "passed": true,
+      "mode": "eth_call"
+    }
+  ],
+  "timestamp": "2026-10-04T13:17:27.632Z"
+}

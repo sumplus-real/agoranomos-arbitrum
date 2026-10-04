@@ -1,0 +1,11 @@
+import {writeFileSync,mkdirSync} from 'node:fs';
+import {createPublicClient,http,parseAbi,keccak256} from 'viem';
+import {ARBITRUM_SEPOLIA,ARBITRUM_USDC} from '../src/chain/settlement.js';
+const p=createPublicClient({chain:ARBITRUM_SEPOLIA,transport:http()});
+const chainId=await p.getChainId();if(chainId!==421614)throw new Error('Expected Arbitrum Sepolia');
+const code=await p.getCode({address:ARBITRUM_USDC});if(!code||code==='0x')throw new Error('Canonical test USDC code missing');
+const abi=parseAbi(['function decimals() view returns(uint8)','function symbol() view returns(string)']);
+const decimals=await p.readContract({address:ARBITRUM_USDC,abi,functionName:'decimals'}),symbol=await p.readContract({address:ARBITRUM_USDC,abi,functionName:'symbol'});
+if(decimals!==6||symbol!=='USDC')throw new Error('Token metadata mismatch');
+const report={network:'arbitrum-sepolia',mode:'read-only-rpc',publicDeployment:false,chainId,rpc:ARBITRUM_SEPOLIA.rpcUrls.default.http[0],token:ARBITRUM_USDC,decimals,symbol,codeBytes:(code.length-2)/2,codeHash:keccak256(code),block:String(await p.getBlockNumber()),timestamp:new Date().toISOString(),canonicalAddressSource:'https://developers.circle.com/stablecoins/usdc-contract-addresses'};
+mkdirSync('artifacts',{recursive:true});writeFileSync('artifacts/sepolia-readonly.json',JSON.stringify(report,null,2));console.log(JSON.stringify(report,null,2));

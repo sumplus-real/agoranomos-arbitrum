@@ -1,0 +1,21 @@
+import assert from 'node:assert/strict';
+import {privateKeyToAccount} from 'viem/accounts';
+import {recoverTypedDataAddress,keccak256,toBytes} from 'viem';
+import {judge,RULE_LABEL} from '../src/verifier/rules.js';
+import {caseIdFor,type CaseRecord} from '../src/evidence/case.js';
+import {signCase} from '../src/verifier/sign.js';
+import {ARBITRUM_SEPOLIA,ARBITRUM_USDC,ATTESTATION_TYPES,attestationDomain} from '../src/chain/settlement.js';
+const key=`0x${'11'.repeat(32)}` as const;
+const payee=privateKeyToAccount(`0x${'22'.repeat(32)}`).address;
+const record:CaseRecord={caseId:caseIdFor(['synthetic','invoice-001']),kind:'pay_undisputed',counterparty:'synthetic:supplier',observed:[{kind:'vendor_charge',source:'synthetic-invoice',ref:'line-001',jobRef:'job-001',billedSeconds:10,chargedMicro:200000},{kind:'delivery_measured',source:'synthetic-measurement',ref:'clip-001',jobRef:'job-001',measuredSeconds:10}],contract:[],inference:[]};
+const registry={'synthetic:supplier':payee};
+const good=judge(record,registry);assert.equal(good.sign,true);if(good.sign)assert.equal(good.maxMicro,200000);
+const short={...record,observed:[record.observed[0],{...record.observed[1],measuredSeconds:4}]};assert.equal(judge(short as CaseRecord,registry).sign,false);
+const missing={...record,observed:[record.observed[0]]};assert.equal(judge(missing,registry).sign,false);
+const inference={...missing,inference:[{label:'agent says delivered',amountMicro:999999999}]};assert.equal(judge(inference as unknown as CaseRecord,registry).sign,false);
+const duplicated={...record,observed:[...record.observed,record.observed[0]]};const d=judge(duplicated,registry);assert.equal(d.sign,true);if(d.sign)assert.equal(d.maxMicro,200000);
+const bad={...record,observed:[{...record.observed[0],chargedMicro:-1},record.observed[1]]};assert.equal(judge(bad as CaseRecord,registry).sign,false);
+const signed=await signCase({record,registry,chainId:421614,contract:payee,token:ARBITRUM_USDC,ruleVersion:keccak256(toBytes(RULE_LABEL)),ttlSeconds:600,nowSeconds:1000},key);assert(signed.signed);
+if(signed.signed){const {attestation,signature}=signed.result;assert.equal(attestation.maxAmount,200000n);const input={types:ATTESTATION_TYPES,primaryType:'Attestation' as const,message:attestation,signature};assert.equal(await recoverTypedDataAddress({...input,domain:attestationDomain(421614,payee)}),privateKeyToAccount(key).address);assert.notEqual(await recoverTypedDataAddress({...input,domain:attestationDomain(42161,payee)}),privateKeyToAccount(key).address);}
+assert.equal(ARBITRUM_SEPOLIA.id,421614);
+console.log('9 verifier/config/signature checks passed; fixtures synthetic, test keys public and unfunded');

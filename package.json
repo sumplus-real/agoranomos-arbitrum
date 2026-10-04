@@ -1,0 +1,21 @@
+{
+  "name": "sumplus-arbitrum-evidence-settlement",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "license": "MIT",
+  "scripts": {
+    "test": "tsx tests/run.ts && tsx tests/local-port.ts",
+    "typecheck": "tsc --noEmit",
+    "demo": "tsx scripts/demo-server.ts",
+    "live": "tsx scripts/live-e2e.ts",
+    "test:local": "tsx scripts/local-e2e.ts",
+    "check:network": "tsx scripts/check-network.ts"
+  },
+  "dependencies": {
+    "tsx": "^4.19.2",
+    "typescript": "^5.7.2",
+    "@types/node": "^22.10.2",
+    "viem": "^2.21.0"
+  }
+}

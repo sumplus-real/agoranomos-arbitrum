@@ -1,0 +1,17 @@
+node_modules/
+.env
+.env.*
+*.env
+contracts/out/
+contracts/cache/
+private-data/
+# Internal coordination and release workspace
+public-release/
+private-release/
+冲刺规划_*.md
+内部*.md
+检查*.md
+PRIVATE_*
+*.log
+artifacts/local/run-output.txt
+artifacts/local/solidity-test-output.txt

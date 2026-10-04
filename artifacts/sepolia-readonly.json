@@ -1,0 +1,15 @@
+{
+  "network": "arbitrum-sepolia",
+  "mode": "read-only-rpc",
+  "publicDeployment": false,
+  "chainId": 421614,
+  "rpc": "https://sepolia-rollup.arbitrum.io/rpc",
+  "token": "0x75faf114eafb1BDbe2F0316DF893fd58CE46AA4d",
+  "decimals": 6,
+  "symbol": "USDC",
+  "codeBytes": 1798,
+  "codeHash": "0x9a736af6aac290d9196883e8686fc1d127ff657ca534fe4b88d6d40dc0bc6750",
+  "block": "315682863",
+  "timestamp": "2026-10-04T13:10:55.394Z",
+  "canonicalAddressSource": "https://developers.circle.com/stablecoins/usdc-contract-addresses"
+}

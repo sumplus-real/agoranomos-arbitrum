@@ -1,0 +1,17 @@
+{
+  "network": "local-anvil",
+  "publicDeployment": false,
+  "tokenType": "mock-ERC20-6-decimal",
+  "chainId": 421614,
+  "token": "0xf2e246bb76df876cef8b38ae84130f4f55de395b",
+  "contract": "0x2946259e0334f33a064106302415ad3391bed384",
+  "owner": "0x7E5F4552091A69125d5DfCb7b8C2659029395Bdf",
+  "agent": "0x2B5AD5c4795c026514f8317c7a215E218DcCD6cF",
+  "verifier": "0x6813Eb9362372EEF6200f3b1dbC3f819671cBA69",
+  "payee": "0x7E5F4552091A69125d5DfCb7b8C2659029395Bdf",
+  "ruleVersion": "0x52a088a36662cc5a7e7c8e0f544a1b12fbb3a51e7620ade1a778398557e2e56b",
+  "deploymentTx": "0xf91a41dccd31ee0a726af626d63f3a8cf5ab5b24983002ea211adf1460f85f55",
+  "periodBudgetMicro": "1000000",
+  "approvalThresholdMicro": "250000",
+  "periodSeconds": 86400
+}
